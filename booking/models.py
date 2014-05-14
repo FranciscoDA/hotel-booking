@@ -30,7 +30,7 @@ class Booking(Model):
     # obs = TextField('Obs')
 
 class Night(Model):
-    pass
+    date = DateField()
 
 
 class Room(Model):
