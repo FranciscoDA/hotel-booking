@@ -19,10 +19,10 @@ class Booking(Model):
     def __str__(self):
         return 'r' + str(self.id)
     client = ForeignKey('Client', verbose_name='Cliente')
-    room = ForeignKey('Room', verbose_name='Habitación')
     booked = DateTimeField('Efectuada', auto_now=True)
-    checkin = DateField('Check-in')
-    checkout = DateField('Check-out')
+    # room = ForeignKey('Room', verbose_name='Habitación')
+    # checkin = DateField('Check-in')
+    # checkout = DateField('Check-out')
     # pax = PositiveSmallIntegerField(default=1)
     # clickon = BooleanField('clickOn', default=False)
     # price = IntegerField('Precio')
@@ -30,7 +30,11 @@ class Booking(Model):
     # obs = TextField('Obs')
 
 class Night(Model):
+    booking = ForeignKey('Booking')
     date = DateField()
+    room = ForeignKey('Room')
+    class Meta:
+        unique_together = ('date', 'room')
 
 
 class Room(Model):
