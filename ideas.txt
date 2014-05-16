@@ -1,2 +1,5 @@
+APLICACIONES / MÓDULOS DE LA APLICACIÓN
+
+
 - Las habitaciones deberían clasificarse según categoría
 - Los precios base se definen por día, categoría de habitación y PAX
