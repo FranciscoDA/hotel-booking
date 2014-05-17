@@ -12,6 +12,12 @@ class Client(Model):
     dni = IntegerField('DNI', unique=True)
     email = EmailField('e-mail')
     phone = IntegerField('Tel')
+    def book(self):
+        return '<a href="../booking/add">Reservar</a>'
+    def details(self):
+        return '<a href="#">Ver detalles</a>'
+    book.allow_tags = True
+    details.allow_tags = True
 
 
 class Booking(Model):

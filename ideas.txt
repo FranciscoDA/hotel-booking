@@ -1,5 +1,13 @@
 APLICACIONES / MÓDULOS DE LA APLICACIÓN
+- Reservas
+- Caja
+- Inventario
+- Envío automatizado de promociones via email
 
 
 - Las habitaciones deberían clasificarse según categoría
 - Los precios base se definen por día, categoría de habitación y PAX
+
+
+ADMIN
+- Debería poderse agregar una reserva desde la página de clientes.

@@ -12,7 +12,7 @@ class BookingAdmin(admin.ModelAdmin):
 
 
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'dni', 'email', 'phone')
+    list_display = ('name', 'dni', 'email', 'phone', 'book', 'details')
     search_fields = ['name', 'dni']
 
 admin.site.register(Room)
