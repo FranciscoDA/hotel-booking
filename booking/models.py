@@ -9,9 +9,9 @@ class Client(Model):
     def __str__(self):
         return self.name
     name = CharField('Nombre', max_length=50)
-    # dni = IntegerField('DNI', unique=True)
-    # email = EmailField('e-mail')
-    # phone = IntegerField('Tel')
+    dni = IntegerField('DNI', unique=True)
+    email = EmailField('e-mail')
+    phone = IntegerField('Tel')
 
 
 class Booking(Model):
@@ -19,7 +19,8 @@ class Booking(Model):
     def __str__(self):
         return 'r' + str(self.id)
     client = ForeignKey('Client', verbose_name='Cliente')
-    booked = DateTimeField('Efectuada', auto_now=True)
+    booked = DateTimeField('Efectuada', auto_now_add=True)
+    last_mod = DateTimeField('Últ. mod.', auto_now=True)
     # room = ForeignKey('Room', verbose_name='Habitación')
     # checkin = DateField('Check-in')
     # checkout = DateField('Check-out')
@@ -30,6 +31,8 @@ class Booking(Model):
     # obs = TextField('Obs')
 
 class Night(Model):
+    def __str__(self):
+        return self.date.isoformat()
     booking = ForeignKey('Booking')
     date = DateField()
     room = ForeignKey('Room')
