@@ -5,13 +5,13 @@ from django.db.models import *
 # DateTimeField, IntegerField, ForeignKey
 
 
-class Client(Model):
+class Guest(Model):
     def __str__(self):
         return self.name
     name = CharField('Nombre', max_length=50)
-    dni = IntegerField('DNI', unique=True)
+    dni = IntegerField('DNI', unique=True, blank=True, null=True)
     email = EmailField('e-mail')
-    phone = IntegerField('Tel')
+    phone = IntegerField('Tel', blank=True, null=True)
     def book(self):
         return '<a href="../booking/add">Reservar</a>'
     def details(self):
@@ -24,7 +24,7 @@ class Booking(Model):
     # Por el momento, Localizador = id. Ideal: base 32.
     def __str__(self):
         return 'r' + str(self.id)
-    client = ForeignKey('Client', verbose_name='Cliente')
+    guest = ForeignKey('Guest', verbose_name='Huésped')
     booked = DateTimeField('Efectuada', auto_now_add=True)
     last_mod = DateTimeField('Últ. mod.', auto_now=True)
     # room = ForeignKey('Room', verbose_name='Habitación')

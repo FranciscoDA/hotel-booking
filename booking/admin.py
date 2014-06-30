@@ -7,14 +7,14 @@ class NightInline(admin.StackedInline):
 
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('client', 'booked')
+    list_display = ('guest', 'booked')
     inlines = [NightInline]
 
 
-class ClientAdmin(admin.ModelAdmin):
+class GuestAdmin(admin.ModelAdmin):
     list_display = ('name', 'dni', 'email', 'phone', 'book', 'details')
     search_fields = ['name', 'dni']
 
 admin.site.register(Room)
-admin.site.register(Client, ClientAdmin)
+admin.site.register(Guest, GuestAdmin)
 admin.site.register(Booking, BookingAdmin)
