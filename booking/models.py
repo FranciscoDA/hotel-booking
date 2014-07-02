@@ -10,7 +10,7 @@ class Guest(Model):
         return self.name
     name = CharField('Nombre', max_length=50)
     dni = IntegerField('DNI', unique=True, blank=True, null=True)
-    email = EmailField('e-mail')
+    email = EmailField('e-mail', blank=True, null=True)
     phone = IntegerField('Tel', blank=True, null=True)
     def book(self):
         return '<a href="../booking/add">Reservar</a>'
@@ -27,14 +27,13 @@ class Booking(Model):
     guest = ForeignKey('Guest', verbose_name='Huésped')
     booked = DateTimeField('Efectuada', auto_now_add=True)
     last_mod = DateTimeField('Últ. mod.', auto_now=True)
-    # room = ForeignKey('Room', verbose_name='Habitación')
-    # checkin = DateField('Check-in')
-    # checkout = DateField('Check-out')
-    # pax = PositiveSmallIntegerField(default=1)
+    checkin = DateField('Check-in', blank=True, null=True)
+    checkout = DateField('Check-out', blank=True, null=True)
+    pax = PositiveSmallIntegerField(default=1)
+    obs = TextField('Obs', blank=True, null=True)
     # clickon = BooleanField('clickOn', default=False)
     # price = IntegerField('Precio')
     # car = BooleanField('Coche', default=False)
-    # obs = TextField('Obs')
 
 class Night(Model):
     def __str__(self):
@@ -50,6 +49,6 @@ class Room(Model):
     def __str__(self):
         return str(self.number)
     number = PositiveSmallIntegerField('Núm.', primary_key=True)
-    # type = CharField('Tipo', max_length=50)
-    # obs = CharField('Obs')
+    type = CharField('Tipo', max_length=50, default='Matrimonial')
+    obs = TextField('Obs', blank=True, null=True)
 
