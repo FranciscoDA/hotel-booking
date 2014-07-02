@@ -10,4 +10,5 @@ APLICACIONES / MÓDULOS DE LA APLICACIÓN
 
 
 ADMIN
-- Se debería poder agregar una reserva desde la página de clientes.
+OK - Se debería poder agregar una reserva desde la página de clientes.
+

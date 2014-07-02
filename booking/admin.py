@@ -8,6 +8,8 @@ class NightInline(admin.StackedInline):
 
 class BookingAdmin(admin.ModelAdmin):
     list_display = ('guest', 'booked')
+    search_fields = ('guest',)
+    raw_id_fields = ('guest',)
     inlines = [NightInline]
 
 
