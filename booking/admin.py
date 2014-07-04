@@ -2,8 +2,9 @@ from django.contrib import admin
 from booking.models import *
 
 
-class NightInline(admin.StackedInline):
+class NightInline(admin.TabularInline):
     model = Night
+    extra = 1
 
 
 class BookingAdmin(admin.ModelAdmin):
