@@ -13,7 +13,7 @@ class Guest(Model):
     email = EmailField('e-mail', blank=True, null=True)
     phone = IntegerField('Tel', blank=True, null=True)
     def book(self):
-        return '<a href="../booking/add">Reservar</a>'
+        return '<a href="../booking/add?guest=%d">Reservar</a>' % self.id
     def details(self):
         return '<a href="#">Ver detalles</a>'
     book.allow_tags = True
