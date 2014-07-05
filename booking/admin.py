@@ -9,13 +9,13 @@ class NightInline(admin.TabularInline):
 
 class BookingAdmin(admin.ModelAdmin):
     list_display = ('guest', 'checkin', 'checkout', 'pax', 'booked', 'last_mod')
-    search_fields = ('guest',)
+    search_fields = ['guest__name', 'checkin'] # Guest dni might also be a good idea
     raw_id_fields = ('guest',)
     inlines = [NightInline]
 
 
 class GuestAdmin(admin.ModelAdmin):
-    list_display = ('name', 'dni', 'email', 'phone', 'book', 'details')
+    list_display = ('name', 'dni', 'email', 'phone', 'book', 'booking_history')
     search_fields = ['name', 'dni']
 
 admin.site.register(Room)

@@ -9,15 +9,15 @@ class Guest(Model):
     def __str__(self):
         return self.name
     name = CharField('Nombre', max_length=50)
-    dni = IntegerField('DNI', unique=True, blank=True, null=True)
+    dni = IntegerField('DNI', unique=True, blank=True, null=True) #pid sounds more generic
     email = EmailField('e-mail', blank=True, null=True)
     phone = IntegerField('Tel', blank=True, null=True)
     def book(self):
         return '<a href="../booking/add?guest=%d">Reservar</a>' % self.id
-    def details(self):
-        return '<a href="#">Ver detalles</a>'
+    def booking_history(self):
+        return '<a href="../booking/add?guest=%d">Historial de reservas</a>' % self.id
     book.allow_tags = True
-    details.allow_tags = True
+    booking_history.allow_tags = True
 
 
 class Booking(Model):
@@ -34,6 +34,7 @@ class Booking(Model):
     # clickon = BooleanField('clickOn', default=False)
     # price = IntegerField('Precio')
     # car = BooleanField('Coche', default=False)
+
 
 class Night(Model):
     def __str__(self):

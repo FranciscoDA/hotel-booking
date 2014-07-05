@@ -2,13 +2,15 @@ APLICACIONES / MÓDULOS DE LA APLICACIÓN
 - Reservas
 - Caja
 - Inventario
-- Envío automatizado de promociones via email
+
+MAIL:
+- Envío automatizado de datos de reservas
+- Envío automatizado de promociones
 
 
-- Las habitaciones deberían clasificarse según categoría
-- Los precios base se definen por día, categoría de habitación y PAX
 
+TO DO:
 
 ADMIN
 OK - Se debería poder agregar una reserva desde la página de clientes.
-
+OK - Arreglar y agregar campos de búsqueda en reservas (BookingAdmin).
