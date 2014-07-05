@@ -15,7 +15,7 @@ class Guest(Model):
     def book(self):
         return '<a href="../booking/add?guest=%d">Reservar</a>' % self.id
     def booking_history(self):
-        return '<a href="../booking/add?guest=%d">Historial de reservas</a>' % self.id
+        return '<a href="../booking?guest=%d">Historial de reservas</a>' % self.id
     book.allow_tags = True
     booking_history.allow_tags = True
 
