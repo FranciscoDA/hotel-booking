@@ -31,9 +31,9 @@ class Booking(Model):
     checkout = DateField('Check-out', blank=True, null=True)
     pax = PositiveSmallIntegerField(default=1)
     obs = TextField('Obs', blank=True, null=True)
+    price = IntegerField('Precio', default=0)
+    car = BooleanField('Coche', default=False)
     # clickon = BooleanField('clickOn', default=False)
-    # price = IntegerField('Precio')
-    # car = BooleanField('Coche', default=False)
 
 
 class Night(Model):
