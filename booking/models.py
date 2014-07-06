@@ -20,6 +20,11 @@ class Guest(Model):
     booking_history.allow_tags = True
 
 
+# class CreditCard(Model):
+#     owner = ForeignKey('Guest')
+#     number = IntegerField()
+
+
 class Booking(Model):
     # Por el momento, Localizador = id. Ideal: base 32.
     def __str__(self):
