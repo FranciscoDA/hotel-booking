@@ -12,9 +12,9 @@ class Migration(SchemaMigration):
         db.create_table('booking_guest', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('dni', self.gf('django.db.models.fields.IntegerField')(null=True, unique=True, blank=True)),
-            ('email', self.gf('django.db.models.fields.EmailField')(null=True, max_length=75, blank=True)),
-            ('phone', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
+            ('dni', self.gf('django.db.models.fields.IntegerField')(unique=True, blank=True, null=True)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, blank=True, null=True)),
+            ('phone', self.gf('django.db.models.fields.IntegerField')(blank=True, null=True)),
         ))
         db.send_create_signal('booking', ['Guest'])
 
@@ -22,12 +22,14 @@ class Migration(SchemaMigration):
         db.create_table('booking_booking', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('guest', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['booking.Guest'])),
-            ('booked', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('booked', self.gf('django.db.models.fields.DateTimeField')(blank=True, auto_now_add=True)),
             ('last_mod', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('checkin', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
-            ('checkout', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
+            ('checkin', self.gf('django.db.models.fields.DateField')(blank=True, null=True)),
+            ('checkout', self.gf('django.db.models.fields.DateField')(blank=True, null=True)),
             ('pax', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=1)),
-            ('obs', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('obs', self.gf('django.db.models.fields.TextField')(blank=True, null=True)),
+            ('price', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('car', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('booking', ['Booking'])
 
@@ -46,8 +48,8 @@ class Migration(SchemaMigration):
         # Adding model 'Room'
         db.create_table('booking_room', (
             ('number', self.gf('django.db.models.fields.PositiveSmallIntegerField')(primary_key=True)),
-            ('type', self.gf('django.db.models.fields.CharField')(default='Matrimonial', max_length=50)),
-            ('obs', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('type', self.gf('django.db.models.fields.CharField')(max_length=50, default='Matrimonial')),
+            ('obs', self.gf('django.db.models.fields.TextField')(blank=True, null=True)),
         ))
         db.send_create_signal('booking', ['Room'])
 
@@ -72,22 +74,24 @@ class Migration(SchemaMigration):
     models = {
         'booking.booking': {
             'Meta': {'object_name': 'Booking'},
-            'booked': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'checkin': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
-            'checkout': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
+            'booked': ('django.db.models.fields.DateTimeField', [], {'blank': 'True', 'auto_now_add': 'True'}),
+            'car': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'checkin': ('django.db.models.fields.DateField', [], {'blank': 'True', 'null': 'True'}),
+            'checkout': ('django.db.models.fields.DateField', [], {'blank': 'True', 'null': 'True'}),
             'guest': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['booking.Guest']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_mod': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'obs': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'pax': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '1'})
+            'obs': ('django.db.models.fields.TextField', [], {'blank': 'True', 'null': 'True'}),
+            'pax': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '1'}),
+            'price': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         'booking.guest': {
             'Meta': {'object_name': 'Guest'},
-            'dni': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'unique': 'True', 'blank': 'True'}),
-            'email': ('django.db.models.fields.EmailField', [], {'null': 'True', 'max_length': '75', 'blank': 'True'}),
+            'dni': ('django.db.models.fields.IntegerField', [], {'unique': 'True', 'blank': 'True', 'null': 'True'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True', 'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'phone': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
+            'phone': ('django.db.models.fields.IntegerField', [], {'blank': 'True', 'null': 'True'})
         },
         'booking.night': {
             'Meta': {'object_name': 'Night', 'unique_together': "(('date', 'room'),)"},
@@ -99,8 +103,8 @@ class Migration(SchemaMigration):
         'booking.room': {
             'Meta': {'object_name': 'Room'},
             'number': ('django.db.models.fields.PositiveSmallIntegerField', [], {'primary_key': 'True'}),
-            'obs': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'type': ('django.db.models.fields.CharField', [], {'default': "'Matrimonial'", 'max_length': '50'})
+            'obs': ('django.db.models.fields.TextField', [], {'blank': 'True', 'null': 'True'}),
+            'type': ('django.db.models.fields.CharField', [], {'max_length': '50', 'default': "'Matrimonial'"})
         }
     }
 
