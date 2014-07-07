@@ -47,6 +47,7 @@ class Night(Model):
     booking = ForeignKey('Booking')
     date = DateField()
     room = ForeignKey('Room')
+    obs = CharField('Observaciones', max_length=200, blank=True, null=True)
     class Meta:
         unique_together = ('date', 'room')
 

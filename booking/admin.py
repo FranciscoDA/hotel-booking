@@ -3,7 +3,7 @@ from booking.models import *
 
 
 class NightAdmin(admin.ModelAdmin):
-    list_display = ('date', 'room', 'guest',)
+    list_display = ('date', 'room', 'guest', 'obs')
     search_fields = ['date']
     def guest(self, obj):
         return obj.booking.guest
