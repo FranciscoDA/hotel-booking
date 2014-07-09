@@ -50,6 +50,8 @@ class Occupancy(Model):
     room = ForeignKey('Room')
     obs = CharField('Observaciones', max_length=200, blank=True, null=True)
     class Meta:
+        verbose_name = 'occupancy'
+        verbose_name_plural = 'occupancies'
         unique_together = ('date', 'room')
 
 

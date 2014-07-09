@@ -2,7 +2,7 @@ from django.contrib import admin
 from booking.models import *
 
 
-class NightAdmin(admin.ModelAdmin):
+class OccupancyAdmin(admin.ModelAdmin):
     list_display = ('date', 'room', 'guest', 'obs')
     search_fields = ['date']
     def guest(self, obj):
@@ -10,8 +10,8 @@ class NightAdmin(admin.ModelAdmin):
     guest.admin_order_field = 'booking__guest'
 
 
-class NightInline(admin.TabularInline):
-    model = Night
+class OccupancyInline(admin.TabularInline):
+    model = Occupancy
     extra = 1
 
 
@@ -19,7 +19,7 @@ class BookingAdmin(admin.ModelAdmin):
     list_display = ('guest', 'checkin', 'checkout', 'pax', 'booked', 'last_mod')
     search_fields = ['guest__name', 'checkin'] # Guest dni might also be a good idea
     raw_id_fields = ('guest',)
-    inlines = [NightInline]
+    inlines = [OccupancyInline]
 
 
 class GuestAdmin(admin.ModelAdmin):
@@ -28,6 +28,6 @@ class GuestAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Room)
-admin.site.register(Night, NightAdmin)
+admin.site.register(Occupancy, OccupancyAdmin)
 admin.site.register(Guest, GuestAdmin)
 admin.site.register(Booking, BookingAdmin)
