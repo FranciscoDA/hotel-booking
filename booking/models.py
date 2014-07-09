@@ -1,4 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 from django.db.models import *
 
 # Model, CharField, TextField,\
@@ -6,13 +7,16 @@ from django.db.models import *
 # DateTimeField, IntegerField, ForeignKey
 
 
+@python_2_unicode_compatible
 class Guest(Model):
-    def __str__(self):
-        return self.name
     name = CharField('Nombre', max_length=50)
-    dni = IntegerField('DNI', unique=True, blank=True, null=True) #pid sounds more generic
+    dni = IntegerField('DNI', unique=True, blank=True, null=True) #nid sounds more generic
     email = EmailField('e-mail', blank=True, null=True)
     phone = IntegerField('Tel', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
     def book(self):
         return '<a href="../booking/add?guest=%d">Reservar</a>' % self.id
     def booking_history(self):
@@ -26,6 +30,7 @@ class Guest(Model):
 #     number = IntegerField()
 
 
+@python_2_unicode_compatible
 class Booking(Model):
     # Por el momento, Localizador = id. Ideal: base 32.
     def __str__(self):
@@ -39,26 +44,29 @@ class Booking(Model):
     obs = TextField('Obs', blank=True, null=True)
     price = IntegerField('Precio', default=0)
     car = BooleanField('Coche', default=False)
-    # clickon = BooleanField('clickOn', default=False)
 
 
+@python_2_unicode_compatible
 class Occupancy(Model):
-    def __str__(self):
-        return self.date.isoformat()
     booking = ForeignKey('Booking')
     date = DateField()
     room = ForeignKey('Room')
     obs = CharField('Observaciones', max_length=200, blank=True, null=True)
+
     class Meta:
         unique_together = ('date', 'room')
         verbose_name = _('occupancy')
         verbose_name_plural = _('occupancies')
 
-
-class Room(Model):
     def __str__(self):
-        return str(self.number)
+        return self.date.isoformat()
+
+
+@python_2_unicode_compatible
+class Room(Model):
     number = PositiveSmallIntegerField('Núm.', primary_key=True)
     type = CharField('Tipo', max_length=50, default='Matrimonial')
     obs = TextField('Obs', blank=True, null=True)
 
+    def __str__(self):
+        return str(self.number)
