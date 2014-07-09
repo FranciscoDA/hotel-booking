@@ -30,7 +30,7 @@ class Booking(Model):
     # Por el momento, Localizador = id. Ideal: base 32.
     def __str__(self):
         return 'r' + str(self.id)
-    guest = ForeignKey('Guest', verbose_name='Huésped')
+    guest = ForeignKey('Guest', verbose_name=_('guest'))
     booked = DateTimeField('Efectuada', auto_now_add=True)
     last_mod = DateTimeField('Últ. mod.', auto_now=True)
     checkin = DateField('Check-in', blank=True, null=True)
@@ -50,9 +50,9 @@ class Occupancy(Model):
     room = ForeignKey('Room')
     obs = CharField('Observaciones', max_length=200, blank=True, null=True)
     class Meta:
-        verbose_name = 'occupancy'
-        verbose_name_plural = 'occupancies'
         unique_together = ('date', 'room')
+        verbose_name = _('occupancy')
+        verbose_name_plural = _('occupancies')
 
 
 class Room(Model):
