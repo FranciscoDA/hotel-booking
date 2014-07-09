@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext_lazy as _
 from django.db.models import *
 
 # Model, CharField, TextField,\
@@ -41,7 +42,7 @@ class Booking(Model):
     # clickon = BooleanField('clickOn', default=False)
 
 
-class Night(Model):
+class Occupancy(Model):
     def __str__(self):
         return self.date.isoformat()
     booking = ForeignKey('Booking')
