@@ -9,16 +9,19 @@ from django.db.models import *
 
 @python_2_unicode_compatible
 class Guest(Model):
-    name = CharField('Nombre', max_length=50)
-    dni = IntegerField('DNI', unique=True, blank=True, null=True) #nid sounds more generic
+    first_name = CharField('Nombre', max_length=50)
+    last_name = CharField('Apellido', max_length=50)
+    nid = IntegerField('DNI', unique=True, blank=True, null=True) #nid sounds more generic
+    # gender = CharField(choices=())
     email = EmailField('e-mail', blank=True, null=True)
     phone = IntegerField('Tel', blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.first_name + ' ' + self.last_name
 
     def book(self):
         return '<a href="../booking/add?guest=%d">Reservar</a>' % self.id
+
     def booking_history(self):
         return '<a href="../booking?guest=%d">Historial de reservas</a>' % self.id
     book.allow_tags = True
@@ -26,7 +29,7 @@ class Guest(Model):
 
 
 # class CreditCard(Model):
-#     owner = ForeignKey('Guest')
+#     guest = ForeignKey('Guest')
 #     number = IntegerField()
 
 

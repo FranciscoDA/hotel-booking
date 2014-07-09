@@ -17,14 +17,14 @@ class OccupancyInline(admin.TabularInline):
 
 class BookingAdmin(admin.ModelAdmin):
     list_display = ('guest', 'checkin', 'checkout', 'pax', 'booked', 'last_mod')
-    search_fields = ['guest__name', 'checkin'] # Guest dni might also be a good idea
+    search_fields = ['guest__first_name', 'guest__last_name', 'checkin'] # Guest dni might also be a good idea
     raw_id_fields = ('guest',)
     inlines = [OccupancyInline]
 
 
 class GuestAdmin(admin.ModelAdmin):
-    list_display = ('name', 'dni', 'email', 'phone', 'book', 'booking_history')
-    search_fields = ['name', 'dni']
+    list_display = ('last_name', 'first_name', 'nid', 'email', 'phone', 'book', 'booking_history')
+    search_fields = ['first_name', 'last_name', 'nid']
 
 
 admin.site.register(Room)
