@@ -9,21 +9,30 @@ from django.db.models import *
 
 @python_2_unicode_compatible
 class Guest(Model):
-    first_name = CharField('Nombre', max_length=50)
-    last_name = CharField('Apellido', max_length=50)
-    nid = IntegerField('DNI', unique=True, blank=True, null=True) #nid sounds more generic
+    first_name = CharField(_('first name'), max_length=50)
+    last_name = CharField(_('last name'), max_length=50)
+    # Translators: use your national identification number.
+    nid = IntegerField(_('ID'), help_text=_('national identification number'),
+                       unique=True, blank=True, null=True)
     # gender = CharField(choices=())
-    email = EmailField('e-mail', blank=True, null=True)
-    phone = IntegerField('Tel', blank=True, null=True)
+    email = EmailField('e-mail', blank=True, null=True,
+                       help_text=_('telephone number'))
+    phone = IntegerField(_('tel.'), blank=True, null=True)
+    # origin
+    # observations
+
+    class Meta:
+        verbose_name = _('guest')
+        verbose_name_plural = _('guests')
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
     def book(self):
-        return '<a href="../booking/add?guest=%d">Reservar</a>' % self.id
+        return '<a href="../booking/add?guest=%d">%s</a>' % (self.id, _('new booking'))
 
     def booking_history(self):
-        return '<a href="../booking?guest=%d">Historial de reservas</a>' % self.id
+        return '<a href="../booking?guest=%d">%s</a>' % (self.id, _('booking history'))
     book.allow_tags = True
     booking_history.allow_tags = True
 
