@@ -6,6 +6,9 @@ from django.db.models import *
 # PositiveSmallIntegerField, EmailField, BooleanField, DateField,\
 # DateTimeField, IntegerField, ForeignKey
 
+# Translators: observations (obs) field. Used in several models.
+obs_verbose = _('observations')
+
 
 @python_2_unicode_compatible
 class Guest(Model):
@@ -14,12 +17,13 @@ class Guest(Model):
     # Translators: use your national identification number.
     nid = IntegerField(_('ID'), help_text=_('national identification number'),
                        unique=True, blank=True, null=True)
-    # gender = CharField(choices=())
-    email = EmailField('e-mail', blank=True, null=True,
+    # Translators: title based on marital or professional status, etc.
+    # title = CharField(choices=())
+    email = EmailField(_('e-mail'), blank=True, null=True,
                        help_text=_('telephone number'))
-    phone = IntegerField(_('tel.'), blank=True, null=True)
-    # origin
-    # observations
+    tel = IntegerField(_('tel.'), blank=True, null=True)
+    # address = ForeignKey('Address')
+    obs = TextField(obs_verbose, blank=True, null=True)
 
     class Meta:
         verbose_name = _('guest')
@@ -44,18 +48,20 @@ class Guest(Model):
 
 @python_2_unicode_compatible
 class Booking(Model):
-    # Por el momento, Localizador = id. Ideal: base 32.
+    # self.id in base 32 could be a nice booking ID (also returned as __str__)
     def __str__(self):
         return 'r' + str(self.id)
     guest = ForeignKey('Guest', verbose_name=_('guest'))
-    booked = DateTimeField('Efectuada', auto_now_add=True)
-    last_mod = DateTimeField('Últ. mod.', auto_now=True)
-    checkin = DateField('Check-in', blank=True, null=True)
-    checkout = DateField('Check-out', blank=True, null=True)
-    pax = PositiveSmallIntegerField(default=1)
-    obs = TextField('Obs', blank=True, null=True)
-    price = IntegerField('Precio', default=0)
-    car = BooleanField('Coche', default=False)
+    added = DateTimeField(_('added'), auto_now_add=True)
+    last_mod = DateTimeField(_('last mod.'), auto_now=True)
+    check_in = DateField(_('check-in'), blank=True, null=True)
+    check_out = DateField(_('check-out'), blank=True, null=True)
+    pax = PositiveSmallIntegerField(_('pax'), default=1)
+    obs = TextField(obs_verbose, blank=True, null=True)
+    # Price should be calculated automatically according to room type, pax,
+    # special offers and discounts, etc.
+    price = IntegerField(_('price'), default=0)
+    has_car = BooleanField('has car', default=False)
 
 
 @python_2_unicode_compatible
@@ -63,7 +69,7 @@ class Occupancy(Model):
     booking = ForeignKey('Booking')
     date = DateField()
     room = ForeignKey('Room')
-    obs = CharField('Observaciones', max_length=200, blank=True, null=True)
+    obs = CharField(obs_verbose, max_length=200, blank=True, null=True)
 
     class Meta:
         unique_together = ('date', 'room')
@@ -76,9 +82,9 @@ class Occupancy(Model):
 
 @python_2_unicode_compatible
 class Room(Model):
-    number = PositiveSmallIntegerField('Núm.', primary_key=True)
-    type = CharField('Tipo', max_length=50, default='Matrimonial')
-    obs = TextField('Obs', blank=True, null=True)
+    number = PositiveSmallIntegerField(_('number'), primary_key=True)
+    type = CharField(_('type'), max_length=50, default='Matrimonial')
+    obs = TextField(_('observations'), blank=True, null=True)
 
     def __str__(self):
         return str(self.number)

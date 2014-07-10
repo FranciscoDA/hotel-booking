@@ -23,7 +23,7 @@ class BookingAdmin(admin.ModelAdmin):
 
 
 class GuestAdmin(admin.ModelAdmin):
-    list_display = ('last_name', 'first_name', 'nid', 'email', 'phone', 'book', 'booking_history')
+    list_display = ('last_name', 'first_name', 'nid', 'email', 'tel', 'book', 'booking_history')
     search_fields = ['first_name', 'last_name', 'nid']
 
 
