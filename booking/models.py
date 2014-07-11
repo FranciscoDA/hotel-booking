@@ -54,14 +54,15 @@ class Booking(Model):
     guest = ForeignKey('Guest', verbose_name=_('guest'))
     added = DateTimeField(_('added'), auto_now_add=True)
     last_mod = DateTimeField(_('last mod.'), auto_now=True)
-    check_in = DateField(_('check-in'), blank=True, null=True)
-    check_out = DateField(_('check-out'), blank=True, null=True)
+    check_in = DateField(_('check-in'))
+    check_out = DateField(_('check-out'))
     pax = PositiveSmallIntegerField(_('pax'), default=1)
     obs = TextField(obs_verbose, blank=True, null=True)
     # Price should be calculated automatically according to room type, pax,
     # special offers and discounts, etc.
     price = IntegerField(_('price'), default=0)
-    has_car = BooleanField('has car', default=False)
+    has_car = BooleanField(_('has car'), default=False)
+    paid = BooleanField(_('paid'), default=False)
 
     class Meta:
         verbose_name = _('booking')
