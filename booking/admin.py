@@ -16,8 +16,8 @@ class OccupancyInline(admin.TabularInline):
 
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('guest', 'checkin', 'checkout', 'pax', 'booked', 'last_mod')
-    search_fields = ['guest__first_name', 'guest__last_name', 'checkin'] # Guest dni might also be a good idea
+    list_display = ('guest', 'check_in', 'check_out', 'pax', 'added', 'last_mod')
+    search_fields = ['guest__first_name', 'guest__last_name', 'check_in'] # Guest dni might also be a good idea
     raw_id_fields = ('guest',)
     inlines = [OccupancyInline]
 

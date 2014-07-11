@@ -14,7 +14,7 @@ obs_verbose = _('observations')
 class Guest(Model):
     first_name = CharField(_('first name'), max_length=50)
     last_name = CharField(_('last name'), max_length=50)
-    # Translators: use your national identification number.
+    # Translators: use your country's national identification number.
     nid = IntegerField(_('ID'), help_text=_('national identification number'),
                        unique=True, blank=True, null=True)
     # Translators: title based on marital or professional status, etc.
@@ -63,6 +63,10 @@ class Booking(Model):
     price = IntegerField(_('price'), default=0)
     has_car = BooleanField('has car', default=False)
 
+    class Meta:
+        verbose_name = _('booking')
+        verbose_name_plural = _('bookings')
+
 
 @python_2_unicode_compatible
 class Occupancy(Model):
@@ -85,6 +89,10 @@ class Room(Model):
     number = PositiveSmallIntegerField(_('number'), primary_key=True)
     type = CharField(_('type'), max_length=50, default='Matrimonial')
     obs = TextField(_('observations'), blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('room')
+        verbose_name_plural = _('rooms')
 
     def __str__(self):
         return str(self.number)

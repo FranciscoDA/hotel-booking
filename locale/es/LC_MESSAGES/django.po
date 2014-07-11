@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-09 14:11-0300\n"
+"POT-Creation-Date: 2014-07-10 20:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,110 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: booking/models.py:54
+#. Translators: observations (obs) field. Used in several models.
+#: booking/models.py:10 booking/models.py:91
+msgid "observations"
+msgstr "observaciones"
+
+#: booking/models.py:15
+msgid "first name"
+msgstr "nombre"
+
+#: booking/models.py:16
+msgid "last name"
+msgstr "apellido"
+
+#. Translators: use your country's national identification number.
+#: booking/models.py:18
+msgid "ID"
+msgstr "DNI"
+
+#: booking/models.py:18
+msgid "national identification number"
+msgstr "Documento Nacional de Identidad"
+
+#. Translators: title based on marital or professional status, etc.
+#. title = CharField(choices=())
+#: booking/models.py:22
+msgid "e-mail"
+msgstr ""
+
+#: booking/models.py:23
+msgid "telephone number"
+msgstr "número de teléfono"
+
+#: booking/models.py:24
+msgid "tel."
+msgstr "tel."
+
+#: booking/models.py:29 booking/models.py:54
+msgid "guest"
+msgstr "huésped"
+
+#: booking/models.py:30
+msgid "guests"
+msgstr "huéspedes"
+
+#: booking/models.py:36
+msgid "new booking"
+msgstr "nueva reserva"
+
+#: booking/models.py:39
+msgid "booking history"
+msgstr "historial de reservas"
+
+#: booking/models.py:55
+msgid "added"
+msgstr "añadida"
+
+#: booking/models.py:56
+msgid "last mod."
+msgstr "últ. mod."
+
+#: booking/models.py:57
+msgid "check-in"
+msgstr ""
+
+#: booking/models.py:58
+msgid "check-out"
+msgstr ""
+
+#: booking/models.py:59
+msgid "pax"
+msgstr ""
+
+#: booking/models.py:63
+msgid "price"
+msgstr "precio"
+
+#: booking/models.py:67
+msgid "booking"
+msgstr "reserva"
+
+#: booking/models.py:68
+msgid "bookings"
+msgstr "reservas"
+
+#: booking/models.py:80
 msgid "occupancy"
 msgstr "ocupación"
 
-#: booking/models.py:55
+#: booking/models.py:81
 msgid "occupancies"
 msgstr "ocupación"
+
+#: booking/models.py:89
+msgid "number"
+msgstr "número"
+
+#: booking/models.py:90
+msgid "type"
+msgstr "tipo"
+
+#: booking/models.py:94
+msgid "room"
+msgstr "habitación"
+
+#: booking/models.py:95
+msgid "rooms"
+msgstr "habitaciones"
