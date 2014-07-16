@@ -14,6 +14,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 # Quick-start development settings - unsuitable for production
