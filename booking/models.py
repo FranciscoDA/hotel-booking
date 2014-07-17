@@ -49,8 +49,6 @@ class Guest(Model):
 @python_2_unicode_compatible
 class Booking(Model):
     # self.id in base 32 could be a nice booking ID (also returned as __str__)
-    def __str__(self):
-        return 'r' + str(self.id)
     guest = ForeignKey('Guest', verbose_name=_('guest'))
     added = DateTimeField(_('added'), auto_now_add=True)
     last_mod = DateTimeField(_('last mod.'), auto_now=True)
@@ -68,12 +66,15 @@ class Booking(Model):
         verbose_name = _('booking')
         verbose_name_plural = _('bookings')
 
+    def __str__(self):
+        return 'r' + str(self.id)
+
 
 @python_2_unicode_compatible
 class Occupancy(Model):
     booking = ForeignKey('Booking')
-    date = DateField()
     room = ForeignKey('Room')
+    date = DateField()
     obs = CharField(obs_verbose, max_length=200, blank=True, null=True)
 
     class Meta:
