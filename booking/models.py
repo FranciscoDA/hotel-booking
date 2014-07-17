@@ -12,6 +12,8 @@ obs_verbose = _('observations')
 
 @python_2_unicode_compatible
 class Guest(Model):
+    added = DateTimeField(_('added'), auto_now_add=True)
+    last_mod = DateTimeField(_('last mod.'), auto_now=True)
     first_name = CharField(_('first name'), max_length=50)
     last_name = CharField(_('last name'), max_length=50)
     # Translators: use your country's national identification number.
@@ -49,9 +51,9 @@ class Guest(Model):
 @python_2_unicode_compatible
 class Booking(Model):
     # self.id in base 32 could be a nice booking ID (also returned as __str__)
-    guest = ForeignKey('Guest', verbose_name=_('guest'))
     added = DateTimeField(_('added'), auto_now_add=True)
     last_mod = DateTimeField(_('last mod.'), auto_now=True)
+    guest = ForeignKey('Guest', verbose_name=_('guest'))
     check_in = DateField(_('check-in'))
     check_out = DateField(_('check-out'))
     pax = PositiveSmallIntegerField(_('pax'), default=1)
